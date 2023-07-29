@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import { LinkContainer } from "react-router-bootstrap";
+import List from "./components/List";
+import Create from "./components/Create";
+import "./App.css";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="d-flex flex-column site-container">
+        <header className="header">
+          <Navbar bg="dark" variant="dark">
+            <Container className="mt-3">
+              <LinkContainer to="/">
+                <Navbar.Brand>Employees List</Navbar.Brand>
+              </LinkContainer>
+              <Nav className="me-auto">
+                <Link to="/create" className="nav-link">
+                  Add New Employee
+                </Link>
+              </Nav>
+            </Container>
+          </Navbar>
+        </header>
+        <main>
+          <Container>
+            <Routes>
+              <Route path="/" element={<List />} />
+              <Route path="/create" element={<Create />} />
+            </Routes>
+          </Container>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
